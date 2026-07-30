@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gowtham Gnanasekaran | Premium GlassOS Portfolio</title>
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     
@@ -19,8 +21,11 @@
             padding: 0;
             scroll-behavior: smooth;
         }
+        
+        /* DARK THEME (DEFAULT) */
         :root {
             --bg-color: #070B17;
+            --mesh-bg: radial-gradient(circle at 50% 50%, #11103a 0%, #070B17 70%);
             --primary: #370B93;
             --secondary: #6D5BFF;
             --accent: #00D4FF;
@@ -31,6 +36,24 @@
             --border: rgba(255, 255, 255, 0.12);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
+            --card-hover-shadow: rgba(0, 0, 0, 0.4);
+            --modal-bg: rgba(20, 24, 45, 0.85);
+        }
+
+        /* LIGHT THEME OVERRIDES */
+        body.light-theme {
+            --bg-color: #f0f4f9;
+            --mesh-bg: radial-gradient(circle at 50% 50%, #e0e7ff 0%, #f0f4f9 70%);
+            --primary: #4f46e5;
+            --secondary: #6366f1;
+            --accent: #0284c7;
+            --glass: rgba(255, 255, 255, 0.65);
+            --glass-bright: rgba(255, 255, 255, 0.85);
+            --border: rgba(99, 102, 241, 0.18);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --card-hover-shadow: rgba(99, 102, 241, 0.15);
+            --modal-bg: rgba(255, 255, 255, 0.92);
         }
 
         body {
@@ -40,6 +63,7 @@
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         /* PREMIUM VISIONOS DYNAMIC BACKGROUND */
@@ -51,7 +75,8 @@
             height: 100vh;
             z-index: -2;
             overflow: hidden;
-            background: radial-gradient(circle at 50% 50%, #11103a 0%, var(--bg-color) 70%);
+            background: var(--mesh-bg);
+            transition: background 0.4s ease;
         }
         .mesh-gradient {
             position: absolute;
@@ -60,8 +85,8 @@
             top: -25%;
             left: -25%;
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(55, 11, 147, 0.4) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(109, 91, 255, 0.35) 0%, transparent 45%),
+                radial-gradient(circle at 20% 30%, rgba(55, 11, 147, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(109, 91, 255, 0.25) 0%, transparent 45%),
                 radial-gradient(circle at 50% 40%, rgba(0, 212, 255, 0.15) 0%, transparent 35%);
             filter: blur(60px);
             animation: meshShift 25s ease infinite alternate;
@@ -75,15 +100,14 @@
         .glass-orb {
             position: absolute;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent);
-            box-shadow: inset 0 0 30px rgba(255,255,255,0.05), 0 20px 50px rgba(0,0,0,0.3);
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent);
+            box-shadow: inset 0 0 30px rgba(255,255,255,0.05), 0 20px 50px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
             animation: floatOrb 30s infinite linear;
         }
         .orb-1 { width: 300px; height: 300px; top: 15%; left: 10%; animation-duration: 35s; }
         .orb-2 { width: 450px; height: 450px; bottom: 10%; right: 5%; animation-duration: 45s; }
         
-        /* Interactive Mouse Glow Track */
         .mouse-glow {
             position: fixed;
             width: 500px;
@@ -137,6 +161,7 @@
             margin-bottom: 40px;
             position: relative;
             display: inline-block;
+            color: var(--text-main);
         }
         .section-title::after {
             content: '';
@@ -165,9 +190,9 @@
         }
         .glass-card:hover {
             background: var(--glass-bright);
-            border-color: rgba(255,255,255,0.25);
+            border-color: var(--accent);
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(109, 91, 255, 0.2);
+            box-shadow: 0 15px 35px var(--card-hover-shadow), 0 0 15px rgba(0, 214, 255, 0.15);
         }
 
         /* BUTTONS */
@@ -195,12 +220,12 @@
         }
         .btn-secondary {
             background: var(--glass);
-            color: white;
+            color: var(--text-main);
             border: 1px solid var(--border);
         }
         .btn-secondary:hover {
             background: var(--glass-bright);
-            border-color: rgba(255,255,255,0.3);
+            border-color: var(--accent);
             transform: scale(1.03);
         }
 
@@ -214,7 +239,7 @@
             max-width: 1100px;
             height: 70px;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.04);
+            background: var(--glass);
             border: 1px solid var(--border);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -233,7 +258,7 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
-            color: white;
+            color: var(--text-main);
             text-decoration: none;
             letter-spacing: 1px;
         }
@@ -252,7 +277,7 @@
             transition: color 0.3s;
         }
         .nav-links a:hover {
-            color: white;
+            color: var(--text-main);
         }
         .nav-links a::after {
             content: '';
@@ -272,12 +297,25 @@
             align-items: center;
             gap: 15px;
         }
-        .nav-actions i {
-            font-size: 1.3rem;
+        .theme-toggle-btn {
+            background: var(--glass-bright);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            transition: transform 0.3s;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
         }
-        .nav-actions i:hover { transform: scale(1.2); color: var(--warning); }
+        .theme-toggle-btn:hover {
+            transform: scale(1.15) rotate(15deg);
+            color: var(--warning);
+            border-color: var(--warning);
+        }
 
         /* HERO SECTION */
         .hero-split {
@@ -287,7 +325,8 @@
             align-items: center;
             padding-top: 20px;
         }
-        .hero-left pre-title {
+        .hero-left .pre-title {
+            display: block;
             color: var(--accent);
             font-weight: 600;
             letter-spacing: 2px;
@@ -300,9 +339,7 @@
             font-weight: 800;
             line-height: 1.1;
             margin: 15px 0;
-            background: linear-gradient(180deg, #fff 0%, #a5b4fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-main);
         }
         .hero-taglines {
             display: flex;
@@ -317,7 +354,7 @@
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 500;
-            color: #c7d2fe;
+            color: var(--text-main);
         }
         .hero-desc {
             color: var(--text-muted);
@@ -332,7 +369,6 @@
             align-items: center;
         }
         
-        /* PREMIUM IMAGE LAYOUT WRAPPER */
         .hero-right {
             position: relative;
             height: 420px;
@@ -348,7 +384,7 @@
             background: var(--glass);
             backdrop-filter: blur(20px);
             padding: 12px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 25px 50px var(--card-hover-shadow);
             animation: floatingUi 6s ease-in-out infinite;
             overflow: hidden;
             position: relative;
@@ -358,15 +394,15 @@
             height: 100%;
             object-fit: cover;
             border-radius: 16px;
-            /* Filter maintains premium cinematic styling context */
             filter: grayscale(20%) contrast(105%);
-            background: #181b2b; /* Fallback accent background color */
+            background: #181b2b;
         }
         
         .floating-pill {
             position: absolute;
             background: var(--glass-bright);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid var(--border);
+            color: var(--text-main);
             padding: 8px 16px;
             border-radius: 30px;
             font-family: 'Space Grotesk', sans-serif;
@@ -374,14 +410,10 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 25px var(--card-hover-shadow);
             animation: floatingUi 8s ease-in-out infinite alternate;
             z-index: 10;
         }
-        .pill-1 { top: 20px; left: -10px; animation-delay: 0s; border-left: 3px solid var(--accent); }
-        .pill-2 { bottom: 60px; right: -20px; animation-delay: 1.5s; border-left: 3px solid var(--success); }
-        .pill-3 { top: 120px; right: -30px; animation-delay: 3s; border-left: 3px solid var(--warning); }
-        .pill-4 { bottom: -5px; left: 10%; animation-delay: 4.5s; border-left: 3px solid var(--secondary); }
         
         @keyframes floatingUi {
             0% { transform: translateY(0px) rotate(0deg); }
@@ -404,11 +436,8 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 2.5rem;
             font-weight: 700;
-            color: white;
+            color: var(--accent);
             margin-bottom: 5px;
-            background: linear-gradient(135deg, #fff, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
         .kpi-label {
             color: var(--text-muted);
@@ -450,20 +479,20 @@
             max-height: 0;
             opacity: 0;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            color: #d1d5db;
+            color: var(--text-main);
             font-size: 0.95rem;
             line-height: 1.6;
             padding-top: 0;
         }
         .about-card.expanded {
             border-color: var(--accent);
-            background: rgba(255,255,255,0.09);
+            background: var(--glass-bright);
         }
         .about-card.expanded .expanded-content {
             max-height: 200px;
             opacity: 1;
             padding-top: 15px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid var(--border);
             margin-top: 15px;
         }
         .expand-indicator {
@@ -540,7 +569,7 @@
             margin-bottom: 8px;
         }
 
-        /* PROJECTS GRID */
+        /* PROJECTS GRID & ICON BADGES */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -552,6 +581,34 @@
             flex-direction: column;
             justify-content: space-between;
             height: 100%;
+            position: relative;
+        }
+        .project-header-icon {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+        .icon-badge-glass {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(0, 214, 255, 0.1);
+            border: 1px solid rgba(0, 214, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.5rem;
+            box-shadow: 0 0 15px rgba(0, 214, 255, 0.15);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover .icon-badge-glass {
+            background: var(--accent);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--accent);
+            transform: scale(1.08);
         }
         .project-meta {
             display: flex;
@@ -583,9 +640,9 @@
             transition: all 0.3s;
         }
         .tab-btn.active {
-            color: white;
+            color: var(--text-main);
             background: var(--glass-bright);
-            box-shadow: 0 0 10px rgba(255,255,255,0.05);
+            box-shadow: 0 0 10px rgba(0,214,255,0.1);
         }
         .case-study-content {
             display: none;
@@ -601,7 +658,7 @@
         .cs-step {
             padding: 20px;
             border-left: 3px solid var(--secondary);
-            background: rgba(255,255,255,0.02);
+            background: var(--glass);
             border-radius: 0 12px 12px 0;
         }
         .cs-step-title {
@@ -621,7 +678,7 @@
         .skill-category-title {
             font-family: 'Manrope', sans-serif;
             font-size: 1.15rem;
-            color: white;
+            color: var(--text-main);
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -633,7 +690,7 @@
             gap: 10px;
         }
         .skill-pill {
-            background: rgba(255,255,255,0.04);
+            background: var(--glass);
             border: 1px solid var(--border);
             padding: 8px 14px;
             border-radius: 12px;
@@ -666,8 +723,8 @@
         }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
         .modal-window {
-            background: rgba(20, 24, 45, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: var(--modal-bg);
+            border: 1px solid var(--border);
             width: 90%;
             max-width: 750px;
             max-height: 85vh;
@@ -677,25 +734,24 @@
             position: relative;
             transform: scale(0.9) translateY(20px);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         }
         .modal-overlay.active .modal-window { transform: scale(1) translateY(0); }
         .close-modal {
             position: absolute;
             top: 25px; right: 25px;
             background: var(--glass);
-            border: none; color: white;
+            border: none; color: var(--text-main);
             width: 35px; height: 35px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer; font-size: 1.2rem; transition: background 0.3s;
         }
         .close-modal:hover { background: var(--glass-bright); }
-        .modal-body h3 { font-family: 'Manrope', sans-serif; font-size: 1.8rem; margin-bottom: 5px; }
+        .modal-body h3 { font-family: 'Manrope', sans-serif; font-size: 1.8rem; margin-bottom: 5px; color: var(--text-main); }
         .modal-subtitle { color: var(--accent); font-weight: 500; margin-bottom: 25px; }
         .modal-section { margin-bottom: 25px; }
-        .modal-section h5 { font-family: 'Space Grotesk', sans-serif; color: white; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.5px; }
+        .modal-section h5 { font-family: 'Space Grotesk', sans-serif; color: var(--text-main); font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.5px; }
         .modal-section p, .modal-section li { color: var(--text-muted); line-height: 1.6; font-size: 1rem; }
-        .modal-section ul { padding-left: 20px; }
 
         /* CONTACT FORM */
         .contact-layout {
@@ -721,18 +777,18 @@
         }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .contact-form input, .contact-form textarea {
-            background: rgba(255,255,255,0.03);
+            background: var(--glass);
             border: 1px solid var(--border);
             padding: 14px 18px;
             border-radius: 12px;
-            color: white;
+            color: var(--text-main);
             font-family: 'Inter', sans-serif;
             outline: none;
             transition: all 0.3s;
         }
         .contact-form input:focus, .contact-form textarea:focus {
             border-color: var(--accent);
-            background: rgba(255,255,255,0.07);
+            background: var(--glass-bright);
             box-shadow: 0 0 10px rgba(0, 214, 255, 0.2);
         }
 
@@ -742,7 +798,7 @@
             border-top: 1px solid var(--border);
             padding: 40px 0;
             text-align: center;
-            background: rgba(7, 11, 23, 0.4);
+            background: var(--glass);
             backdrop-filter: blur(10px);
         }
         .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
@@ -783,10 +839,13 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-actions">
-            <a href="#resume" class="btn btn-secondary" style="padding: 6px 16px; font-size: 0.85rem;">
+            <a href="gowtham-resume.pdf" class="btn btn-secondary" style="padding: 6px 16px; font-size: 0.85rem;">
                 Resume <i class="ph ph-arrow-down"></i>
             </a>
-            <i class="ph ph-moon"></i>
+            <!-- WORKING THEME TOGGLE BUTTON -->
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Theme">
+                <i class="ph ph-moon" id="themeIcon"></i>
+            </button>
         </div>
     </nav>
 
@@ -796,33 +855,44 @@
         <section id="hero" class="visible">
             <div class="hero-split">
                 <div class="hero-left">
-                    <pre-title>Hello, I'm</pre-title>
+                    <span class="pre-title">Hello, I'm</span>
                     <h1>Gowtham Gnanasekaran</h1>
                     <div class="hero-taglines">
                         <span class="tag-badge">Senior Business Analyst</span>
+                        <span class="tag-badge">Scrum Practitioner</span>
+                        <span class="tag-badge">Project Delivery</span>
                         <span class="tag-badge">Agile Delivery Specialist</span>
-                        <span class="tag-badge">Healthcare Technology</span>
                         <span class="tag-badge">Automation Systems Architect</span>
                     </div>
                     <p class="hero-desc">
-                        Bridging operations and elite technical infrastructures by turning complex workflows into sleek enterprise automation solutions. Expert at aligning diverse engineering squads with product pipelines.
+                        A Senior Business Analyst and Agile Delivery Specialist with over a decade of experience spearheading enterprise SaaS, digital transformations, and high-stakes operations[cite: 3]. I specialize in bridging complex business strategy with technical engineering teams, turning manual workflows into advanced automated solutions while orchestrating cross-functional squads to deliver critical product releases on time[cite: 3].
                     </p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary">View Projects <i class="ph ph-arrow-up-right"></i></a>
-                        <a href="https://linkedin.com" target="_blank" class="btn btn-secondary"><i class="ph ph-linkedin-logo"></i> LinkedIn</a>
+                        <a href="https://www.linkedin.com/in/gowtham-gnanasekaran-93716a186" target="_blank" class="btn btn-secondary"><i class="ph ph-linkedin-logo"></i> LinkedIn</a>
                     </div>
                 </div>
                 
                 <!-- PORTFOLIO IMAGE HOLDER -->
                 <div class="hero-right">
                     <div class="profile-container">
-                        <!-- REPLACE src VALUE BELOW WITH YOUR PICTURE URL -->
-                        <img class="profile-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600" alt="Gowtham Gnanasekaran Portrait">
+                        <img class="profile-image" src="https://lh3.googleusercontent.com/d/1Rp32JCHKQG-EoWjKTlUHQEEx_Xb2DfbE" alt="Gowtham Gnanasekaran Portrait">
                     </div>
-                    <div class="floating-pill pill-1"><i class="ph ph-terminal-window" style="color:var(--accent)"></i> Google Apps Script</div>
-                    <div class="floating-pill pill-2"><i class="ph ph-database" style="color:var(--success)"></i> SQL Systems</div>
-                    <div class="floating-pill pill-3"><i class="ph ph-file-text" style="color:var(--warning)"></i> BRD / Agile</div>
-                    <div class="floating-pill pill-4"><i class="ph ph-kanban" style="color:var(--secondary)"></i> Jira Optimization</div>
+                    <div class="floating-pill" style="top: 20px; left: -30px; border-left: 3px solid var(--accent); animation-delay: 0s;">
+                        <i class="ph ph-sparkles" style="color:var(--accent)"></i> Generative AI & Automation
+                    </div>
+                    <div class="floating-pill" style="top: 110px; right: -80px; border-left: 3px solid var(--success); animation-delay: 1.5s;">
+                        <i class="ph ph-terminal-window" style="color:var(--success)"></i> Apps Script & Python
+                    </div>
+                    <div class="floating-pill" style="top: 210px; left: -45px; border-left: 3px solid var(--warning); animation-delay: 3s;">
+                        <i class="ph ph-database" style="color:var(--warning)"></i> SQL & Data Analytics
+                    </div>
+                    <div class="floating-pill" style="bottom: 70px; right: -30px; border-left: 3px solid var(--secondary); animation-delay: 4.5s;">
+                        <i class="ph ph-briefcase" style="color:var(--secondary)"></i> Business Analysis & BRD
+                    </div>
+                    <div class="floating-pill" style="bottom: -15px; left: 15%; border-left: 3px solid var(--accent); animation-delay: 6s;">
+                        <i class="ph ph-kanban" style="color:var(--accent)"></i> Agile & Jira Delivery
+                    </div>
                 </div>
             </div>
 
@@ -860,9 +930,9 @@
                         <i class="ph ph-chart-bar"></i>
                         <h3>Business Analysis</h3>
                     </div>
-                    <p class="preview-text">Deconstruct complex healthcare and internal workflows into actionable technical solutions.</p>
+                    <p class="preview-text">Deconstruct complex healthcare and internal workflows into actionable technical solutions[cite: 3].</p>
                     <div class="expanded-content">
-                        Deep background authoring high-fidelity Business Requirement Documents (BRD), configuring architectural workflows, and leading User Acceptance Testing (UAT) cycles across cross-functional engineering pipelines.
+                        Deep background authoring high-fidelity Business Requirement Documents (BRD), configuring architectural workflows, and leading User Acceptance Testing (UAT) cycles across cross-functional engineering pipelines[cite: 3].
                     </div>
                     <div class="expand-indicator"><i class="ph ph-caret-down"></i></div>
                 </div>
@@ -872,9 +942,9 @@
                         <i class="ph ph-cpu"></i>
                         <h3>Process Automation</h3>
                     </div>
-                    <p class="preview-text">Architecting custom scripting frameworks to eliminate legacy operation bottlenecks.</p>
+                    <p class="preview-text">Architecting custom scripting frameworks to eliminate legacy operation bottlenecks[cite: 3].</p>
                     <div class="expanded-content">
-                        Advanced design utilizing Google Apps Script, REST APIs, and modern database queries to link isolated web layers, reduce manual overhead, and accelerate data validation cycles.
+                        Advanced design utilizing Google Apps Script, REST APIs, and modern database queries to link isolated web layers, reduce manual overhead, and accelerate data validation cycles[cite: 3].
                     </div>
                     <div class="expand-indicator"><i class="ph ph-caret-down"></i></div>
                 </div>
@@ -884,9 +954,9 @@
                         <i class="ph ph-users-three"></i>
                         <h3>Agile Leadership</h3>
                     </div>
-                    <p class="preview-text">Directing delivery teams via highly streamlined sprints and clear product roadmaps.</p>
+                    <p class="preview-text">Directing delivery teams via highly streamlined sprints and clear product roadmaps[cite: 3].</p>
                     <div class="expanded-content">
-                        Expert Scrum master handling capacity planning, removing systemic team blockages, and engineering pristine cross-team collaboration dashboards inside Jira and enterprise portals.
+                        Expert Scrum master handling capacity planning, removing systemic team blockages, and engineering pristine cross-team collaboration dashboards inside Jira and enterprise portals[cite: 3].
                     </div>
                     <div class="expand-indicator"><i class="ph ph-caret-down"></i></div>
                 </div>
@@ -897,25 +967,24 @@
         <section id="experience">
             <h2 class="section-title">Professional Timeline</h2>
             <div class="timeline">
-                
-                <div class="glass-card timeline-item" onclick="openExperienceModal('rrd')">
+                <div class="glass-card timeline-item" onclick="openExperienceModal('rrd_ba')">
                     <div class="timeline-badge"></div>
                     <div class="timeline-header">
                         <h4>Senior Business Analyst</h4>
                         <span class="timeline-year">2025 - Present</span>
                     </div>
                     <div class="timeline-company">RRD (R.R. Donnelley)</div>
-                    <p style="color: var(--text-muted); font-size:0.95rem;">Leading custom engineering requirements, automation workflows, and global technical client deliverables.</p>
+                    <p style="color: var(--text-muted); font-size:0.95rem;">Leading custom engineering requirements, automation workflows, and global technical client deliverables across healthcare SaaS systems[cite: 3].</p>
                 </div>
 
-                <div class="glass-card timeline-item" onclick="openExperienceModal('csr')">
+                <div class="glass-card timeline-item" onclick="openExperienceModal('rrd_csr')">
                     <div class="timeline-badge"></div>
                     <div class="timeline-header">
                         <h4>Senior Client Support Representative</h4>
                         <span class="timeline-year">2022 - 2025</span>
                     </div>
-                    <div class="timeline-company">Enterprise Support Ops</div>
-                    <p style="color: var(--text-muted); font-size:0.95rem;">Managed high-tier systemic resolutions, client interface layers, and technical solution delivery optimization.</p>
+                    <div class="timeline-company">RRD (R.R. Donnelley)</div>
+                    <p style="color: var(--text-muted); font-size:0.95rem;">Managed high-tier systemic resolutions, executive interface layers, and technical solution delivery optimization with automated dashboards[cite: 3].</p>
                 </div>
 
                 <div class="glass-card timeline-item" onclick="openExperienceModal('ra')">
@@ -924,47 +993,135 @@
                         <h4>Senior Research Analyst</h4>
                         <span class="timeline-year">2019 - 2022</span>
                     </div>
-                    <div class="timeline-company">Data Architecture & Analytics Group</div>
-                    <p style="color: var(--text-muted); font-size:0.95rem;">Deep database validation execution, workflow optimization research, and trend forecasting models.</p>
+                    <div class="timeline-company">Merit Data & Technology</div>
+                    <p style="color: var(--text-muted); font-size:0.95rem;">Executed deep corporate data mapping, workflow optimization research, market visibility analysis, and structural lead tracking models[cite: 3].</p>
                 </div>
 
+                <div class="glass-card timeline-item" onclick="openExperienceModal('ts')">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-header">
+                        <h4>Senior Associate / Technical Support</h4>
+                        <span class="timeline-year">2015 - 2018</span>
+                    </div>
+                    <div class="timeline-company">Sutherland Global Services</div>
+                    <p style="color: var(--text-muted); font-size:0.95rem;">Delivered enterprise network infrastructure diagnostics, technical escalation routing, and incoming team training protocols[cite: 3].</p>
+                </div>
+
+                <div class="glass-card timeline-item" onclick="openExperienceModal('fn')">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-header">
+                        <h4>Technical Support Engineer</h4>
+                        <span class="timeline-year">2013 - 2015</span>
+                    </div>
+                    <div class="timeline-company">Fixnow Support</div>
+                    <p style="color: var(--text-muted); font-size:0.95rem;">Executed remote troubleshooting operations, complex network configurations, and systemic service desk incident resolutions[cite: 3].</p>
+                </div>
             </div>
         </section>
 
-        <!-- PROJECTS GRID SECTION -->
+        <!-- PROJECTS GRID SECTION (ALL ICONS ADDED & THEME SYNCED) -->
         <section id="projects">
             <h2 class="section-title">Selected Solutions</h2>
             <div class="projects-grid">
                 
-                <div class="glass-card project-card" onclick="openProjectModal('analytics')">
+                <!-- SDG INSIGHT HUB -->
+                <div class="glass-card project-card" onclick="openProjectModal('sdg_insight_hub')">
                     <div>
-                        <h4 style="font-size:1.3rem; font-family:'Manrope'; margin-bottom:10px;">Analytics Platform & Beebole Integration</h4>
-                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;">Aggregated cross-departmental operation performance and project time metrics into a dynamic single source of truth matrix tool.</p>
+                        <div class="project-header-icon">
+                            <div class="icon-badge-glass">
+                                <i class="ph ph-lightning"></i>
+                            </div>
+                            <h4 style="font-size:1.25rem; font-family:'Manrope';">SDG Insight Hub: Enterprise Platform</h4>
+                        </div>
+                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;">Serverless workforce management platform solving night-shift rollover boundaries, real-time manager visibility, and concurrent lock mechanisms.</p>
                     </div>
                     <div class="project-meta">
-                        <span>SQL / Beebole Api Tracker</span>
+                        <span>GAS / JS / Chart.js / SheetJS</span>
                         <i class="ph ph-arrow-right"></i>
                     </div>
                 </div>
 
-                <div class="glass-card project-card" onclick="openProjectModal('healthcare')">
+                <!-- KNOWLEDGE PORTAL -->
+                <div class="glass-card project-card" onclick="openProjectModal('knowledge_portal')">
                     <div>
-                        <h4 style="font-size:1.3rem; font-family:'Manrope'; margin-bottom:10px;">Healthcare Automation Suite</h4>
-                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;">Optimized sensitive patient care pipeline management logic to align strictly with modern data compliance laws.</p>
+                        <div class="project-header-icon">
+                            <div class="icon-badge-glass">
+                                <i class="ph ph-browsers"></i>
+                            </div>
+                            <h4 style="font-size:1.25rem; font-family:'Manrope';">Enterprise Google Sites Knowledge Portal</h4>
+                        </div>
+                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;">Designed and maintained a central Google Sites portal providing teams direct access to SOPs, process documentation, and release schedules[cite: 3].</p>
                     </div>
                     <div class="project-meta">
-                        <span>Workflow API / Security Layer</span>
+                        <span>Google Workspace / Portal Design</span>
                         <i class="ph ph-arrow-right"></i>
                     </div>
                 </div>
 
-                <div class="glass-card project-card" onclick="openProjectModal('portal')">
+                <!-- JIRA ANALYTICS -->
+                <div class="glass-card project-card" onclick="openProjectModal('jira_analytics')">
                     <div>
-                        <h4 style="font-size:1.3rem; font-family:'Manrope'; margin-bottom:10px;">Jira Performance Dashboard</h4>
-                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;">Designed advanced custom engineering agile metric boards to maximize visibility across operational teams.</p>
+                        <div class="project-header-icon">
+                            <div class="icon-badge-glass">
+                                <i class="ph ph-chart-line-up"></i>
+                            </div>
+                            <h4 style="font-size:1.25rem; font-family:'Manrope';">Jira Delivery & Sprint Analytics Dashboard</h4>
+                        </div>
+                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;">Developed a live dashboard integrating Jira data to provide real-time visibility into sprint progress, backlog health, and team velocity metrics[cite: 3].</p>
                     </div>
                     <div class="project-meta">
-                        <span>Jira Rest Engine / Filters</span>
+                        <span>Jira REST Engine / Agile Analytics</span>
+                        <i class="ph ph-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- BEEBOLE AUTOMATION -->
+                <div class="glass-card project-card" onclick="openProjectModal('beebole_automation')">
+                    <div>
+                        <div class="project-header-icon">
+                            <div class="icon-badge-glass">
+                                <i class="ph ph-clock-afternoon"></i>
+                            </div>
+                            <h4 style="font-size:1.25rem; font-family:'Manrope';">Beebole Resource Utilization Automation</h4>
+                        </div>
+                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;">Built an automated integration between tracking systems and Beebole timesheets to improve client billing accuracy and capacity planning[cite: 3].</p>
+                    </div>
+                    <div class="project-meta">
+                        <span>API Tracker / Workforce Tools</span>
+                        <i class="ph ph-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- UAT FRAMEWORK -->
+                <div class="glass-card project-card" onclick="openProjectModal('uat_framework')">
+                    <div>
+                        <div class="project-header-icon">
+                            <div class="icon-badge-glass">
+                                <i class="ph ph-check-circle"></i>
+                            </div>
+                            <h4 style="font-size:1.25rem; font-family:'Manrope';">BRD & UAT Management Framework</h4>
+                        </div>
+                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;">Established standardized processes for Business Requirement Documents (BRDs), requirement analysis, UAT validation, and release sign-off frameworks[cite: 3].</p>
+                    </div>
+                    <div class="project-meta">
+                        <span>BRD Lifecycle / QA & Defect Tracking</span>
+                        <i class="ph ph-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- HEALTHCARE DOCUMENT AUTOMATION -->
+                <div class="glass-card project-card" onclick="openProjectModal('healthcare_document')">
+                    <div>
+                        <div class="project-header-icon">
+                            <div class="icon-badge-glass">
+                                <i class="ph ph-file-text"></i>
+                            </div>
+                            <h4 style="font-size:1.25rem; font-family:'Manrope';">Healthcare Document Automation Platform</h4>
+                        </div>
+                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;">Managed document automation (DAT/Content Now) supporting CMS policy releases, PDF accessibility compliance, and XML rules configuration[cite: 3].</p>
+                    </div>
+                    <div class="project-meta">
+                        <span>DAT System / XML / CMS Core</span>
                         <i class="ph ph-arrow-right"></i>
                     </div>
                 </div>
@@ -981,42 +1138,40 @@
                     <button class="tab-btn" onclick="switchCaseStudy(event, 'cs-ucla')">UCLA Onboarding System</button>
                 </div>
 
-                <!-- Case Study 1 -->
                 <div id="cs-automation" class="case-study-content active">
                     <h3 style="font-family:'Manrope'; margin-bottom:10px;">100+ CMS Releases Scaling Framework</h3>
-                    <p style="color:var(--text-muted); margin-bottom:20px;">Redesigning manual enterprise release updates through programmatic tracking matrices.</p>
+                    <p style="color:var(--text-muted); margin-bottom:20px;">Redesigning manual enterprise release updates through programmatic tracking matrices[cite: 3].</p>
                     <div class="cs-flow">
                         <div class="cs-step">
                             <div class="cs-step-title">Problem</div>
-                            <p style="font-size:0.9rem; color:var(--text-muted);">Decentralized update data loops caused massive testing lag spikes.</p>
+                            <p style="font-size:0.9rem; color:var(--text-muted);">Decentralized update data loops caused massive testing lag spikes[cite: 3].</p>
                         </div>
                         <div class="cs-step">
                             <div class="cs-step-title">Solution</div>
-                            <p style="font-size:0.9rem; color:var(--text-muted);">Engineered an automated script router mapping environment branches instantly.</p>
+                            <p style="font-size:0.9rem; color:var(--text-muted);">Engineered an automated script router mapping environment branches instantly[cite: 3].</p>
                         </div>
                         <div class="cs-step">
                             <div class="cs-step-title">Impact</div>
-                            <p style="font-size:0.9rem; color:var(--text-muted);">Cut human error down by 40% while standardizing delivery speeds completely.</p>
+                            <p style="font-size:0.9rem; color:var(--text-muted);">Cut human error down by 40% while standardizing delivery speeds completely[cite: 3].</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Case Study 2 -->
                 <div id="cs-ucla" class="case-study-content">
                     <h3 style="font-family:'Manrope'; margin-bottom:10px;">UCLA Internal Onboarding Pipeline</h3>
-                    <p style="color:var(--text-muted); margin-bottom:20px;">Streamlining user activation access permissions across diverse external systems frameworks.</p>
+                    <p style="color:var(--text-muted); margin-bottom:20px;">Streamlining user activation access permissions across diverse external systems frameworks[cite: 3].</p>
                     <div class="cs-flow">
                         <div class="cs-step">
                             <div class="cs-step-title">Problem</div>
-                            <p style="font-size:0.9rem; color:var(--text-muted);">Incoming cohorts experienced account generation blocks via siloed tools.</p>
+                            <p style="font-size:0.9rem; color:var(--text-muted);">Incoming cohorts experienced account generation blocks via siloed tools[cite: 3].</p>
                         </div>
                         <div class="cs-step">
                             <div class="cs-step-title">Solution</div>
-                            <p style="font-size:0.9rem; color:var(--text-muted);">Assembled automated webhook endpoints linking directories to verification modules.</p>
+                            <p style="font-size:0.9rem; color:var(--text-muted);">Assembled automated webhook endpoints linking directories to verification modules[cite: 3].</p>
                         </div>
                         <div class="cs-step">
                             <div class="cs-step-title">Impact</div>
-                            <p style="font-size:0.9rem; color:var(--text-muted);">Successfully onboarded hundreds of personnel smoothly with zero admin delays.</p>
+                            <p style="font-size:0.9rem; color:var(--text-muted);">Successfully onboarded hundreds of personnel smoothly with zero admin delays[cite: 3].</p>
                         </div>
                     </div>
                 </div>
@@ -1027,7 +1182,6 @@
         <section id="skills">
             <h2 class="section-title">Technical Matrix</h2>
             <div class="skills-container">
-                
                 <div class="glass-card">
                     <div class="skill-category-title"><i class="ph ph-briefcase" style="color:var(--accent)"></i> Business Analysis</div>
                     <div class="skill-tags">
@@ -1055,7 +1209,6 @@
                         <span class="skill-pill">Enterprise Content Ops</span>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -1065,11 +1218,11 @@
             <div class="glass-card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
                 <div>
                     <h3 style="font-family:'Manrope'; margin-bottom:8px;">Curriculum Vitae</h3>
-                    <p style="color:var(--text-muted); font-size:0.95rem;">Review complete technical metrics, career growth patterns, and academic project histories.</p>
+                    <p style="color:var(--text-muted); font-size:0.95rem;">Review complete technical metrics, career growth patterns, and academic project histories[cite: 3].</p>
                 </div>
                 <div style="display:flex; gap:15px;">
-                    <a href="#" class="btn btn-primary"><i class="ph ph-download-simple"></i> Download Resume</a>
-                    <a href="https://linkedin.com" target="_blank" class="btn btn-secondary"><i class="ph ph-linkedin-logo"></i> View LinkedIn</a>
+                    <a href="gowtham-resume.pdf" class="btn btn-primary"><i class="ph ph-download-simple"></i> Download Resume</a>
+                    <a href="https://www.linkedin.com/in/gowtham-gnanasekaran-93716a186" target="_blank" class="btn btn-secondary"><i class="ph ph-linkedin-logo"></i> View LinkedIn</a>
                 </div>
             </div>
         </section>
@@ -1079,12 +1232,12 @@
             <h2 class="section-title">Initiate Dialogue</h2>
             <div class="contact-layout">
                 <div>
-                    <p style="color:var(--text-muted); margin-bottom:30px; line-height:1.6;">Ready to build premium, automated data pipeline hubs for your infrastructure? Reach out directly.</p>
-                    <a href="mailto:gowtham@example.com" class="info-link"><i class="ph ph-envelope"></i> gowtham@example.com</a>
+                    <p style="color:var(--text-muted); margin-bottom:30px; line-height:1.6;">Ready to build premium, automated data pipeline hubs for your infrastructure? Reach out directly[cite: 3].</p>
+                    <a href="mailto:gowthamgnanase@gmail.com" class="info-link"><i class="ph ph-envelope"></i> gowthamgnanase@gmail.com</a>
                     <a href="#" class="info-link"><i class="ph ph-map-pin"></i> Chennai, TN, India</a>
                 </div>
                 <div>
-                    <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully through GlassOS channel!');">
+                    <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
                         <div class="form-row">
                             <input type="text" placeholder="First Name" required>
                             <input type="text" placeholder="Last Name" required>
@@ -1099,13 +1252,11 @@
 
     </div>
 
-    <!-- DYNAMIC CORE APPLICATION SYSTEM MODAL -->
+    <!-- DYNAMIC MODAL -->
     <div class="modal-overlay" id="globalModal" onclick="closeActiveModal(event)">
         <div class="modal-window">
             <button class="close-modal" onclick="document.getElementById('globalModal').classList.remove('active')"><i class="ph ph-x"></i></button>
-            <div class="modal-body" id="modalBodyElement">
-                <!-- Injected dynamically by app logic controller -->
-            </div>
+            <div class="modal-body" id="modalBodyElement"></div>
         </div>
     </div>
 
@@ -1124,7 +1275,20 @@
 
     <!-- INTERACTIVE APP LOGIC SCRIPTS -->
     <script>
-        // Interactive Mouse Aura Physics Tracker
+        // Theme Toggler Logic (Dark / Light)
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            body.classList.toggle('light-theme');
+            
+            if (body.classList.contains('light-theme')) {
+                icon.className = 'ph ph-sun';
+            } else {
+                icon.className = 'ph ph-moon';
+            }
+        }
+
+        // Mouse Tracker
         const glowElement = document.getElementById('mouseGlow');
         window.addEventListener('mousemove', (e) => {
             glowElement.style.left = e.clientX + 'px';
@@ -1163,7 +1327,7 @@
         }, { threshold: 0.5 });
         countElements.forEach(el => countObserver.observe(el));
 
-        // Smooth Appearance Viewport Trigger Matrix
+        // Smooth Appearance Viewport Trigger
         const sectionCollection = document.querySelectorAll('section');
         const viewObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1174,7 +1338,7 @@
         }, { threshold: 0.15 });
         sectionCollection.forEach(sec => viewObserver.observe(sec));
 
-        // Case Study Tab Controller Logic
+        // Case Study Tab Controller
         function switchCaseStudy(event, caseStudyId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.case-study-content').forEach(content => content.classList.remove('active'));
@@ -1182,52 +1346,87 @@
             document.getElementById(caseStudyId).classList.add('active');
         }
 
-        // Datastore Repository for Dynamic Modals 
+        // Data Stores
         const experienceDataStore = {
-            rrd: {
+            rrd_ba: {
                 title: "Senior Business Analyst",
                 sub: "RRD (R.R. Donnelley) | 2025 - Present",
-                responsibilities: "Architect global automated operational workflow frameworks pipelines. Liaise with executive tier technical units to draft architectural data transition documents.",
-                achievements: "Built zero-latency tracking dashboard eliminating multi-layered client communication check delays.",
-                tech: "SQL Enterprise Platforms, Advanced Google Apps Script API Routing Modules, Jira Scrum Boards."
+                responsibilities: "Direct offshore tracking logs for major health client modules. Gather requirements, map BRD documents, and drive Agile delivery sprints.",
+                achievements: "Managed full lifecycle integration loops sync across a 13-member team smoothly matching over 25 client configurations.",
+                tech: "SQL Enterprise Platforms, Google Apps Script API Routing Modules, Jira Scrum Boards."
             },
-            csr: {
+            rrd_csr: {
                 title: "Senior Client Support Representative",
-                sub: "Enterprise Support Ops | 2022 - 2025",
-                responsibilities: "Managed elite production operations issues, coordinated rapid software patching schedules, and enhanced legacy workflow maps.",
-                achievements: "Optimized response parameters by 35% using automated script sorting rules on incoming data queues.",
-                tech: "Helpdesk Automation Systems, Internal Knowledge Frameworks, SQL Monitoring scripts."
+                sub: "RRD (R.R. Donnelley) | 2022 - 2025",
+                responsibilities: "Governed operations tracking spreadsheets, tracked renewal portfolios via Salesforce/Smartsheet, and managed service desk operations.",
+                achievements: "Built custom tracking automation rules improving team data calculation speeds by 25%. Received the 2024 Stellar Award.",
+                tech: "Helpdesk Automation Systems, SQL Monitoring scripts, Smartsheet CRM."
             },
             ra: {
                 title: "Senior Research Analyst",
-                sub: "Data Architecture Group | 2019 - 2022",
-                responsibilities: "Conducted continuous historical process audits and mapped deep structural trends for system engineering deployment teams.",
-                achievements: "Cleaned and structurally consolidated over 5 years of complex historical data tables with zero operations downtime.",
+                sub: "Merit Data & Tech Group | 2019 - 2022",
+                responsibilities: "Conducted market trend research analysis, mapped geographic target structures, and evaluated data pipeline cross-verification steps.",
+                achievements: "Cleaned and structurally consolidated over 5 years of complex data layouts with zero operations downtime.",
                 tech: "Data Visualization suites, Core Advanced Querying Libraries, XML data feeds."
+            },
+            ts: {
+                title: "Senior Associate / Technical Support",
+                sub: "Sutherland Global Services | 2015 - 2018",
+                responsibilities: "Delivered enterprise network infrastructure diagnostics, technical escalation routing, and incoming team training protocols.",
+                achievements: "Maintained top-tier resolution speeds and assisted in training junior support infrastructure groups.",
+                tech: "Network Infrastructure Diagnostics, Active Directory, IT Escalation Frameworks"
+            },
+            fn: {
+                title: "Technical Support Engineer",
+                sub: "Fixnow Support | 2013 - 2015",
+                responsibilities: "Handled remote client systems diagnostics, localized network configurations, infrastructure component mapping, and rapid incident handling.",
+                achievements: "Maintained a high first-contact resolution SLA rate across multi-tier client infrastructure portfolios.",
+                tech: "Remote Desktop Diagnostics tools, Network Topology configuration, Service Desk CRM suites."
             }
         };
 
         const projectDataStore = {
-            analytics: {
-                title: "Analytics Platform & Beebole Integration Matrix",
-                sub: "Enterprise Resource Dashboard Architecture",
-                problem: "Core management components had zero cohesive vision tracking pipeline efficiency speeds globally.",
-                solution: "Designed custom scripting bridges running automated cron checks aggregating localized database updates daily and cross-referencing Beebole API trackers.",
-                impact: "Decreased dashboard manual reporting cycle delays from weeks down to automated instant refreshes."
+            sdg_insight_hub: {
+                title: "⚡ SDG Insight Hub: Full-Stack Enterprise Platform",
+                sub: "Serverless Workforce Management & Time-Tracking Ecosystem",
+                problem: "Operations required solving complex challenges including midnight shift boundary rollovers (cutting off at 5:30 AM), real-time manager visibility, pessimistic UI anti-data loss, and concurrent lock mechanisms.",
+                solution: "Architected a serverless system using Vanilla JS/HTML/CSS on top of Google Apps Script and Google Sheets relational storage. Implemented live drafts, LockService queueing, role management, and SheetJS reports.",
+                impact: "Delivered 100% data collection safety, zero record overwriting during peak shift-end traffic, and complete managerial transparency."
             },
-            healthcare: {
-                title: "Healthcare Automation Suite Architecture",
-                sub: "Secure Patient Pipeline Systems",
-                problem: "Delicate client records process mapping suffered bottleneck checks under modern regulatory rules.",
-                solution: "Engineered secure data sanitization wrappers processing target fields via strict token arrays.",
-                impact: "Assured 100% compliance operations metrics while maintaining pristine data accessibility speeds."
+            knowledge_portal: {
+                title: "Enterprise Google Sites Knowledge Portal",
+                sub: "Google Workspace Knowledge Architecture",
+                problem: "Global distributed delivery structures lacked an accessible repository for technical SOPs, process workflows, and release schedules.",
+                solution: "Architected a secure central portal ecosystem on Google Sites, structuring accessible directories for documentation, onboarding playbooks, and active management trackers.",
+                impact: "Unified cross-functional alignment and established a clear source of truth, minimizing operational lookup friction."
             },
-            portal: {
-                title: "Jira Performance Hub Dashboard",
-                sub: "Interactive Agile Tracking Framework",
-                problem: "Standard sprint layouts lacked clean modern interactive tools for development squad visualization requirements.",
-                solution: "Embedded specialized REST endpoint listeners parsing sprint velocities into beautiful, high-scannable project boards.",
-                impact: "Transformed internal alignment parameters into an instantly scannable, sleek team environment tracker."
+            jira_analytics: {
+                title: "Jira Delivery & Sprint Analytics Dashboard",
+                sub: "Jira REST API Analytics Engine",
+                problem: "Extracting pure delivery performance and velocity tracking data required tedious manual extraction pipelines.",
+                solution: "Built a customized web analytics interface integrating directly with the Jira REST API to extract live metrics and compile engineering bottlenecks.",
+                impact: "Drastically enhanced team visibility, refined early roadblock detection, and provided definitive release readiness parameters."
+            },
+            beebole_automation: {
+                title: "Beebole Resource Utilization Automation",
+                sub: "API Orchestration & Integration Layer",
+                problem: "Reconciling internal productivity trackers against external Beebole time cards was manual and error-prone.",
+                solution: "Engineered an automated API synchronization service that safely maps operation tracking logs directly into Beebole timesheets without manual administrative touchpoints.",
+                impact: "Guaranteed absolute client billing accuracy, optimized deep resource capacity planning matrices, and slashed operational administrative hours."
+            },
+            uat_framework: {
+                title: "Business Requirements & UAT Management Framework",
+                sub: "Agile SDLC Quality & Governance Framework",
+                problem: "Communication misalignment between technical engineering teams and clients frequently introduced scoping gaps and delayed testing sign-offs.",
+                solution: "Formulated a robust operational blueprint for Business Requirement Documents (BRDs), UAT workflows, defect prioritization matrices, and release checkpoints.",
+                impact: "Greatly mitigated post-deployment defects and established predictable software release delivery timelines."
+            },
+            healthcare_document: {
+                title: "Healthcare Document Automation Platform (DAT & Content Now)",
+                sub: "Document Automation Tool (DAT) & Content Now Systems",
+                problem: "Generating thousands of critical healthcare policy forms demanded flawless adherence to strict CMS deadlines and complex accessibility rules.",
+                solution: "Orchestrated end-to-end document engine rule systems utilizing DAT and Content Now. Mapped custom XML structures and applied automated 508 accessibility remediation layers.",
+                impact: "Successfully navigated continuous compliance release updates under zero-downtime timelines while ensuring comprehensive accessibility compliance."
             }
         };
 
