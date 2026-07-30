@@ -979,9 +979,10 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-actions">
-            <a href="gowtham-resume.pdf" class="btn btn-secondary" style="padding: 6px 16px; font-size: 0.85rem;">
+            <!-- RESUME TRIGGER BUTTON -->
+            <button onclick="handleResumeDownload()" class="btn btn-secondary" style="padding: 6px 16px; font-size: 0.85rem;">
                 Resume <i class="ph ph-arrow-down"></i>
-            </a>
+            </button>
             <!-- THEME TOGGLE BUTTON -->
             <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Theme">
                 <i class="ph ph-moon" id="themeIcon"></i>
@@ -1023,7 +1024,7 @@
                     </p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary">View Projects <i class="ph ph-arrow-up-right"></i></a>
-                        <a href="https://www.linkedin.com/in/gowtham-gnanasekaran-93716a186" target="_blank" class="btn btn-secondary"><i class="ph ph-linkedin-logo"></i> LinkedIn</a>
+                        <button onclick="handleResumeDownload()" class="btn btn-secondary"><i class="ph ph-file-pdf"></i> Download Resume</button>
                     </div>
                 </div>
                 
@@ -1045,7 +1046,7 @@
                         <div class="floating-pill pill-4">
                             <i class="ph ph-briefcase" style="color:var(--secondary)"></i> Business Analysis & BRD
                         </div>
-                        <div class="floating-pill pill-5">
+                        . <div class="floating-pill pill-5">
                             <i class="ph ph-kanban" style="color:var(--accent)"></i> Agile & Jira Delivery
                         </div>
                     </div>
@@ -1377,7 +1378,7 @@
                     <p style="color:var(--text-muted); font-size:0.95rem;">Review complete technical metrics, career growth patterns, and academic project histories.</p>
                 </div>
                 <div style="display:flex; gap:15px; flex-wrap: wrap;">
-                    <a href="gowtham-resume.pdf" class="btn btn-primary"><i class="ph ph-download-simple"></i> Download Resume</a>
+                    <button onclick="handleResumeDownload()" class="btn btn-primary"><i class="ph ph-download-simple"></i> Download Resume</button>
                     <a href="https://www.linkedin.com/in/gowtham-gnanasekaran-93716a186" target="_blank" class="btn btn-secondary"><i class="ph ph-linkedin-logo"></i> View LinkedIn</a>
                 </div>
             </div>
@@ -1390,6 +1391,7 @@
                 <div>
                     <p style="color:var(--text-muted); margin-bottom:30px; line-height:1.6;">Ready to build premium, automated data pipeline hubs for your infrastructure? Reach out directly.</p>
                     <a href="mailto:gowthamgnanase@gmail.com" class="info-link"><i class="ph ph-envelope"></i> gowthamgnanase@gmail.com</a>
+                    <a href="mailto:gowthamgnanase@gmail.com" class="info-link"><i class="ph ph-envelope"></i> gowthamgnanase@outlook.com</a>
                     <a href="#" class="info-link"><i class="ph ph-map-pin"></i> Chennai, TN, India</a>
                 </div>
                 <div>
@@ -1431,6 +1433,39 @@
 
     <!-- INTERACTIVE APP LOGIC SCRIPTS -->
     <script>
+        // Resume Download Modal & Fallback Handler
+        function handleResumeDownload() {
+            modalBodyContent.innerHTML = `
+                <h3>Gowtham Gnanasekaran — Resume</h3>
+                <div class="modal-subtitle">Senior Business Analyst & Delivery Specialist</div>
+                <div class="modal-section">
+                    <p style="margin-bottom: 20px;">Choose an option to view or download the official curriculum vitae:</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="gowtham-resume.pdf" download="Gowtham_Gnanasekaran_Resume.pdf" class="btn btn-primary" onclick="triggerDownloadFeedback(this)">
+                            <i class="ph ph-file-pdf"></i> Download PDF Document
+                        </a>
+                        <button onclick="window.print()" class="btn btn-secondary">
+                            <i class="ph ph-printer"></i> Print / Save as PDF
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-section" style="margin-top: 25px; padding-top: 15px; border-top: 1px solid var(--border);">
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                        <i class="ph ph-info"></i> Note: Ensure your PDF asset is placed as <code>gowtham-resume.pdf</code> in your project's root folder.
+                    </p>
+                </div>
+            `;
+            modalOverlayElement.classList.add('active');
+        }
+
+        function triggerDownloadFeedback(btn) {
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<i class="ph ph-check-circle"></i> Downloading...`;
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 3000);
+        }
+
         // Theme Toggler Logic (Dark / Light)
         function toggleTheme() {
             const body = document.body;
@@ -1515,7 +1550,7 @@
             document.getElementById(caseStudyId).classList.add('active');
         }
 
-        // Data Stores (Cleaned of all citations)
+        // Data Stores
         const experienceDataStore = {
             rrd_ba: {
                 title: "Senior Business Analyst",
